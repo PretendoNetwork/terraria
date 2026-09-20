@@ -77,4 +77,5 @@ All configuration options are handled via environment variables
 | `PN_TERRARIA_ACCOUNT_GRPC_API_KEY`       | API key for your account server gRPC service                                                    | No (Assumed to be an open gRPC API)           |
 | `PN_TERRARIA_FRIENDS_GRPC_HOST`          | Host name for Friends gRPC service (used for friends matchmaking)                               | Yes                                           |
 | `PN_TERRARIA_FRIENDS_GRPC_PORT`          | Port for Friends gRPC service                                                                   | Yes                                           |
-| `PN_TERRARIA_FRIENDS_GRPC_API_KEY`       | API key for Friends gRPC service                                                                | No (Assumed to be an open gRPC API)
+| `PN_TERRARIA_FRIENDS_GRPC_API_KEY`       | API key for Friends gRPC service                                                                | No (Assumed to be an open gRPC API)|
+| `PN_TERRARIA_HEALTH_CHECK_PORT`          | Port for the UDP health check                                                                                       | No
