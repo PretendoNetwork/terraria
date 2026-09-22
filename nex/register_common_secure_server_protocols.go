@@ -1,6 +1,7 @@
 package nex
 
 import (
+	"github.com/PretendoNetwork/nex-go/v2/types"
 	commonnattraversal "github.com/PretendoNetwork/nex-protocols-common-go/v2/nat-traversal"
 	commonsecure "github.com/PretendoNetwork/nex-protocols-common-go/v2/secure-connection"
 	commonutility "github.com/PretendoNetwork/nex-protocols-common-go/v2/utility"
@@ -24,7 +25,12 @@ import (
 func registerCommonSecureServerProtocols() {
 	secureProtocol := secure.NewProtocol()
 	globals.SecureEndpoint.RegisterServiceProtocol(secureProtocol)
-	commonsecure.NewCommonProtocol(secureProtocol).EnableInsecureRegister()
+	commonSecureProtocol := commonsecure.NewCommonProtocol(secureProtocol)
+	commonSecureProtocol.EnableInsecureRegister()
+
+	commonSecureProtocol.CreateReportDBRecord = func(_ types.PID, _ types.UInt32, _ types.QBuffer) error {
+		return nil
+	}
 
 	natTraversalProtocol := nattraversal.NewProtocol()
 	globals.SecureEndpoint.RegisterServiceProtocol(natTraversalProtocol)
@@ -42,6 +48,8 @@ func registerCommonSecureServerProtocols() {
 	globals.SecureEndpoint.RegisterServiceProtocol(matchmakeExtensionProtocol)
 	commonMatchmakeExtensionProtocol := commonmatchmakeextension.NewCommonProtocol(matchmakeExtensionProtocol)
 	commonMatchmakeExtensionProtocol.SetManager(globals.MatchmakingManager)
+
+	globals.MatchmakingManager.GetUserFriendPIDs = globals.GetUserFriendPIDs
 
 	rankingProtocol := ranking.NewProtocol()
 	globals.SecureEndpoint.RegisterServiceProtocol(rankingProtocol)
